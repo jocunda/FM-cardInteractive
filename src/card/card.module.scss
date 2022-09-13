@@ -1,0 +1,55 @@
+@import '../sass/color.scss';
+@import '../sass/font.scss';
+@import '../sass/mediaquery.scss';
+
+* {
+    font-family: $spacegrostek;
+    font-size: 18px;
+}
+
+h1 {
+    background-image: linear-gradient($Lineargradient1, $Lineargradient2);
+    color: yellow;
+}
+
+img {
+    width: 400px;
+    margin: 10px;
+}
+
+label {
+    position: relative;
+    top: 15px;
+    text-align: left;
+}
+
+.container {
+    background-image: url(../images/bg-main-desktop.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: 30% 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 500px 600px;
+}
+
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    border-radius: 8px;
+    border: 1px solid grey;
+    padding: 5px;
+    margin: 5px;
+}
+
+.confirmbtn {
+    background-color: $Verydarkviolet;
+    color: $white;
+}
