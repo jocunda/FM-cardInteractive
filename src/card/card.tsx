@@ -22,8 +22,8 @@ export default function Card() {
                         <span>{name}</span>
                         <span className={styles.date}>{date}</span>
                     </p>
-
                 </div>
+
                 <div className={styles.cardbackcontainer}>
                     <img src={cardback} alt="cardback" />
                     <p className={styles.cvcnum}>{cvc}</p>
