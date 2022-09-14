@@ -4,12 +4,22 @@ import cardback from '../images/bg-card-back.png'
 import cx from 'classnames';
 import { useState } from 'react';
 import { FaCircle, FaRegCircle } from 'react-icons/fa'
+import { useForm } from '../hooks/OnChange';
+import { useDebounce } from '../hooks/Debounce';
 
 export default function Card() {
-    const [name, setName] = useState<string>('Jane AppleSeed')
-    const [date, setDate] = useState<string>('00/00')
-    const [card, setCard] = useState<string>('0000 0000 0000 0000')
-    const [cvc, setCvc] = useState<string>('000')
+
+
+    const initialState: Cardstate = {
+        name: 'Jane AppleSeed',
+        date: '00/00',
+        card: '0000 0000 0000 0000',
+        cvc: '000',
+    }
+
+    const { onChange, values } = useForm(initialState)
+    const inputvalues = useDebounce(values, 500)
+
 
     return <>
         <div className={styles.container}>
@@ -17,16 +27,16 @@ export default function Card() {
                 <div className={styles.cardfrontcontainer}>
                     <img className={styles.cardfront} src={cardfront} alt="cardfront" />
                     <p className={styles.logo}><FaCircle className={styles.biglogo} /> <FaRegCircle /></p>
-                    <p className={styles.cardnum}>{card}</p>
-                    <p className={styles.namedate}>
-                        <span>{name}</span>
-                        <span className={styles.date}>{date}</span>
-                    </p>
+                    <p className={styles.cardnum}>{inputvalues.card}</p>
+
+                    <span className={styles.namedate}>{inputvalues.name}</span>
+                    <span className={styles.date}>{inputvalues.date}</span>
+
                 </div>
 
                 <div className={styles.cardbackcontainer}>
                     <img src={cardback} alt="cardback" />
-                    <p className={styles.cvcnum}>{cvc}</p>
+                    <p className={styles.cvcnum}>{inputvalues.cvc}</p>
                 </div>
             </div>
             <form action="" method="post" >
@@ -35,15 +45,39 @@ export default function Card() {
                     <input type="text"
                         className={cx(styles.input, styles.inputname)}
                         id="inputname"
+                        name="name"
                         placeholder="e.g. Jane AppleSeed"
+                        onChange={onChange}
                     />
                     <label htmlFor="inputnumber" className={styles.inputnumber}>CARD NUMBER</label>
-                    <input type="number" className={cx(styles.input, styles.inputnumber)} id="inputnumber" maxLength={16} />
+                    <input type="number"
+                        className={cx(styles.input, styles.inputnumber)}
+                        id="inputnumber"
+                        name="card"
+                        maxLength={16}
+                        onChange={onChange}
+                    />
                     <label htmlFor="inputmonth" className={styles.inputmonth}>EXP.DATE(MM/YY)</label>
-                    <input type="number" className={cx(styles.input, styles.inputmonth)} id="inputmonth" maxLength={2} />
-                    <input type="number" className={cx(styles.input, styles.inputyear)} id="inputyear" min="22" max="2099" step="1" />
+                    <input type="number"
+                        className={cx(styles.input, styles.inputmonth)}
+                        id="inputmonth"
+                        name="date"
+                        maxLength={2}
+                        onChange={onChange}
+                    />
+                    <input type="number"
+                        className={cx(styles.input, styles.inputyear)}
+                        id="inputyear" min="22" max="99" step="1"
+                        onChange={onChange}
+                    />
                     <label htmlFor="inputcvc" className={styles.inputcvc}>CVC</label>
-                    <input type="number" className={cx(styles.input, styles.inputcvc)} id="inputcvc" maxLength={3} />
+                    <input type="number"
+                        className={cx(styles.input, styles.inputcvc)}
+                        id="inputcvc"
+                        name="cvc"
+                        maxLength={3}
+                        onChange={onChange}
+                    />
                     <button type="submit" className={styles.confirmbtn}>Confirm</button>
                 </div>
             </form>
