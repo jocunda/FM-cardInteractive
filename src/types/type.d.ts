@@ -1,6 +1,7 @@
 type Cardstate = {
     name: string,
-    date: string,
+    month: string,
+    year: string,
     card: string,
     cvc: string,
 }

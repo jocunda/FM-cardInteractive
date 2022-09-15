@@ -40,7 +40,13 @@ input {
     &:focus {
         border-color: $Darkgrayishviolet;
     }
+
+    &::placeholder {
+        color: $Lightgrayishviolet
+    }
 }
+
+
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -202,6 +208,30 @@ input::-webkit-inner-spin-button {
 .inputcvc {
     grid-area: main3;
     margin-left: 20px;
+}
+
+.blank {
+    border-color: $red;
+}
+
+.text {
+    color: $red;
+    font-size: 12px;
+    position: relative;
+    bottom: -45px;
+    right: 25px;
+    width: 150px;
+    letter-spacing: normal;
+}
+
+.textWrong {
+    color: $red;
+    font-size: 12px;
+    position: relative;
+    bottom: -40px;
+    right: 30px;
+    width: 250px;
+    letter-spacing: normal;
 }
 
 .confirmbtn {
