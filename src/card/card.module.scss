@@ -243,3 +243,30 @@ input::-webkit-inner-spin-button {
     grid-area: footer;
     margin-top: 10px;
 }
+
+
+.truecontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+}
+
+.titlethankyou {
+    font-size: 25px;
+    margin-top: 25px;
+    margin-bottom: 5px;
+}
+
+.addedtext {
+    color: $Darkgrayishviolet;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+
+.continuebtn {
+    margin-top: 20px;
+    @extend .confirmbtn
+}

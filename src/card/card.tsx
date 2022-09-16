@@ -2,13 +2,14 @@ import styles from './card.module.scss'
 import cardfront from '../images/bg-card-front.png'
 import cardback from '../images/bg-card-back.png'
 import cx from 'classnames';
-import { ChangeEvent, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { FaCircle, FaRegCircle } from 'react-icons/fa'
 import { useForm } from '../hooks/OnChange';
 import { useDebounce } from '../hooks/Debounce';
+import { ReactComponent as Iconsvg } from '../svg/icon-complete.svg'
 
 export default function Card() {
-
+    const [submit, setSubmit] = useState<boolean>(true)
 
     const initialState: Cardstate = {
         name: 'Jane AppleSeed',
@@ -37,8 +38,9 @@ export default function Card() {
         if (input.match(pattern)) return true;
     }
 
-    const onConfirm = () => {
-        alert('success')
+    const submitForm = () => {
+
+        setSubmit(!submit)
     }
 
     return <>
@@ -59,7 +61,7 @@ export default function Card() {
                     <p className={styles.cvcnum}>{inputvalues.cvc}</p>
                 </div>
             </div>
-            <form action="" method="post" id="form1">
+            {submit ? <form onSubmit={submitForm}>
                 <div className={styles.formContainer}>
 
                     <label htmlFor="inputname" className={styles.inputname}>CARDHOLDER NAME</label>
@@ -117,10 +119,15 @@ export default function Card() {
                         onChange={onChange}
                     />
                     {inputvalues.cvc.length === 0 ? <p className={cx(styles.inputcvc, styles.text)}>Can't be blank</p> : <></>}
-                    <button type="submit" form="form1" className={styles.confirmbtn} onClick={onConfirm}>Confirm</button>
+                    <button type="submit" className={styles.confirmbtn} onClick={submitForm}>Confirm</button>
                 </div>
-            </form>
-
+            </form> : <div className={styles.truecontainer}>
+                <Iconsvg />
+                <h1 className={styles.titlethankyou}>THANK YOU!</h1>
+                <p className={styles.addedtext}>We've added your card details</p>
+                <button className={styles.continuebtn} onClick={submitForm}>Continue</button>
+            </div>
+            }
         </div>
 
     </>
